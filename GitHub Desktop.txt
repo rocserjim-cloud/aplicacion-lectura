@@ -1,0 +1,6 @@
+¿Cómo trabajaremos de ahora en adelante?
+¡Es la mejor parte! Cuando me pidas que agregue una nueva función (como el juego de preguntas) o cambie un color, yo haré los cambios en tu computadora. Cuando yo termine, tú solo tendrás que abrir tu programa GitHub Desktop, ponerle un nombre al cambio y darle a "Commit" y luego a "Push".
+
+Netlify detectará ese "Push" automáticamente y tu página web se actualizará sola sin que tengas que entrar a Netlify ni usar archivos .zip nunca más.
+
+Abre ese link en tu celular u otro dispositivo y confírmame si ahora sí puedes ver los cambios del logo que hicimos hace un rato.

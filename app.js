@@ -23,6 +23,10 @@ for (let i = books.length - 1; i > 0; i--) {
     [books[i], books[j]] = [books[j], books[i]];
 }
 
+// Variables de estado para la paginación/carga
+let currentFilteredBooks = books;
+let visibleCount = 50;
+
 document.addEventListener('DOMContentLoaded', () => {
     // Populate Genres (only take top 20 genres to avoid clutter, there might be many)
     const genreCounts = {};
@@ -49,9 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('searchInput').addEventListener('input', filterBooks);
     document.getElementById('targetAgeFilter').addEventListener('change', filterBooks);
     document.getElementById('closeModal').addEventListener('click', closeModal);
+    document.getElementById('loadMoreBtn').addEventListener('click', loadMoreBooks);
 
     // Initial Render (only render first 50 to avoid lagging the browser initially)
-    renderBooks(books.slice(0, 50));
+    updateLoadMoreButton();
+    renderBooks(currentFilteredBooks.slice(0, visibleCount));
 
     // Render Itineraries
     renderItineraries();
@@ -130,8 +136,28 @@ function filterBooks() {
         });
     }
 
-    // Render max 50 results for performance
-    renderBooks(filtered.slice(0, 50));
+    // Actualizar variables de estado
+    currentFilteredBooks = filtered;
+    visibleCount = 50;
+    
+    // Render initial results and update button
+    updateLoadMoreButton();
+    renderBooks(currentFilteredBooks.slice(0, visibleCount));
+}
+
+function loadMoreBooks() {
+    visibleCount += 50;
+    updateLoadMoreButton();
+    renderBooks(currentFilteredBooks.slice(0, visibleCount));
+}
+
+function updateLoadMoreButton() {
+    const container = document.getElementById('loadMoreContainer');
+    if (visibleCount < currentFilteredBooks.length) {
+        container.style.display = 'flex';
+    } else {
+        container.style.display = 'none';
+    }
 }
 
 function renderBooks(booksToRender) {
