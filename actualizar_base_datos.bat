@@ -1,0 +1,3 @@
+powershell.exe -Command "$BooksHeaders = @('Id', 'Genero', 'Titulo', 'Anio', 'Autor', 'Extra', 'Pais', 'Sinopsis', 'Etiquetas'); $booksCsv = Import-Csv 'base de datos libros.csv' -Header $BooksHeaders -Encoding UTF8; $booksJson = $booksCsv | ConvertTo-Json -Depth 10 -Compress; Set-Content -Path 'data.js' -Value \"const dummyBooks = $booksJson;\" -Encoding UTF8; $ItinHeaders = @('Titulo', 'Descripcion', 'Libros'); if (Test-Path 'itinerarios.csv') { $itinCsv = Import-Csv 'itinerarios.csv' -Header $ItinHeaders -Encoding UTF8; $itinJson = $itinCsv | ConvertTo-Json -Depth 10 -Compress } else { $itinJson = '[]' }; Add-Content -Path 'data.js' -Value \"`nconst dummyItineraries = $itinJson;\" -Encoding UTF8"
+echo ¡Base de datos y Rutas actualizadas con exito!
+pause
